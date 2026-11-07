@@ -3,76 +3,228 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daniel Nonato — Datenautomatisierung (Python), Remote Contractor</title>
+<title>Daniel Nonato — Data Automation (Python) · Remote Contractor</title>
+<meta name="description" content="Remote Contractor für Datenautomatisierung mit Python: Web Scraping, Datenbereinigung & Migration, Excel/CRM-Automation, B2B-Listen und Bots. 5 eigene Tools, 190 automatisierte Tests.">
 <style>
-  :root { --dark:#1a2332; --acc:#2563eb; --gray:#555; --bg:#f7f9fc; }
+  :root { --dark:#1a2332; --dark2:#22304a; --acc:#2563eb; --acc2:#7ea8f5; --gray:#555; --muted:#6b7a90; --bg:#f7f9fc; --line:#dbe2ef; --ok:#0f7b4f; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; color:var(--dark); background:#fff; }
-  .hero { background:var(--dark); color:#fff; padding:64px 24px 56px; text-align:center; }
-  .hero h1 { font-size:2.1rem; letter-spacing:.5px; }
-  .hero .role { color:#7ea8f5; font-size:1.15rem; margin-top:10px; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; color:var(--dark); background:#fff; line-height:1.55; }
+  a { color:var(--acc); }
+  .top { position:sticky; top:0; z-index:10; background:rgba(26,35,50,.96); backdrop-filter:blur(6px); border-bottom:1px solid rgba(255,255,255,.08); }
+  .top .inner { max-width:960px; margin:0 auto; padding:10px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .brand { color:#fff; text-decoration:none; font-weight:700; letter-spacing:.3px; }
+  .top nav { display:flex; flex-wrap:wrap; gap:6px 18px; }
+  .top nav a { color:#c9d4e6; text-decoration:none; font-size:.86rem; }
+  .top nav a:hover { color:#fff; }
+  .hero { background:linear-gradient(160deg,var(--dark) 0%,var(--dark2) 100%); color:#fff; padding:64px 24px 54px; text-align:center; }
+  .hero h1 { font-size:2.15rem; letter-spacing:.4px; line-height:1.2; }
+  .hero .role { color:var(--acc2); font-size:1.15rem; margin-top:10px; }
   .hero .tag { margin-top:18px; font-size:.95rem; color:#c9d4e6; }
-  .wrap { max-width:860px; margin:0 auto; padding:0 24px; }
-  h2 { color:var(--acc); font-size:1.05rem; letter-spacing:1px; text-transform:uppercase; margin:48px 0 16px; border-bottom:1px solid #dbe2ef; padding-bottom:8px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .hero .meta { margin-top:14px; font-size:.82rem; color:#8fa1bd; }
+  .actions { margin-top:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .btn { display:inline-block; background:var(--acc); color:#fff; text-decoration:none; padding:11px 24px; border-radius:8px; font-weight:600; font-size:.92rem; border:1px solid var(--acc); }
+  .btn:hover { background:#1d4ed8; }
+  .btn.ghost { background:transparent; border-color:rgba(255,255,255,.35); color:#e6edf9; }
+  .btn.ghost:hover { background:rgba(255,255,255,.08); }
+  .wrap { max-width:960px; margin:0 auto; padding:0 24px; }
+  h2 { color:var(--acc); font-size:1.02rem; letter-spacing:1px; text-transform:uppercase; margin:52px 0 16px; border-bottom:1px solid var(--line); padding-bottom:8px; }
+  .lead { color:var(--muted); font-size:.95rem; max-width:760px; margin-bottom:18px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
   .card { background:var(--bg); border:1px solid #e4eaf3; border-radius:10px; padding:16px 18px; }
   .card b { display:block; margin-bottom:6px; }
   .card p { font-size:.9rem; color:var(--gray); }
-  .tests { display:inline-block; margin-top:8px; font-size:.8rem; color:var(--acc); border:1px solid #bcd0f7; border-radius:20px; padding:2px 10px; }
+  .card .links { margin-top:12px; display:flex; flex-wrap:wrap; gap:14px; font-size:.82rem; }
+  .card .links a { text-decoration:none; font-weight:600; }
+  .tests { display:inline-block; margin-top:8px; font-size:.78rem; color:var(--ok); background:#eaf7f1; border:1px solid #bfe6d5; border-radius:20px; padding:2px 10px; }
   ul.why { list-style:none; }
   ul.why li { padding:6px 0 6px 26px; position:relative; color:var(--gray); font-size:.95rem; }
   ul.why li::before { content:"✓"; position:absolute; left:0; color:var(--acc); font-weight:700; }
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; counter-reset:step; }
+  .step { background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 18px 16px 50px; position:relative; }
+  .step::before { counter-increment:step; content:counter(step); position:absolute; left:16px; top:15px; width:24px; height:24px; border-radius:50%; background:var(--acc); color:#fff; font-size:.8rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step b { display:block; font-size:.93rem; margin-bottom:4px; }
+  .step p { font-size:.86rem; color:var(--gray); }
   .cta { margin:56px 0; background:var(--bg); border:1px solid #e4eaf3; border-radius:12px; padding:32px; text-align:center; }
-  .cta a { display:inline-block; background:var(--acc); color:#fff; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; margin-top:14px; }
-  footer { background:var(--dark); color:#8fa1bd; text-align:center; padding:24px; font-size:.8rem; margin-top:40px; }
-  .lang { text-align:center; margin-top:14px; }
-  .lang a { color:#9db9f0; font-size:.85rem; }
+  .cta b { font-size:1.1rem; }
+  .cta span { color:var(--gray); }
+  .cta .btn { margin-top:16px; }
+  .cta .small { display:block; margin-top:12px; font-size:.84rem; color:var(--gray); }
+  .cta .small a { color:var(--acc); }
+  .cases { font-size:.88rem; color:var(--gray); margin-top:14px; }
+  .lang-divider { margin:72px 0 0; border-top:3px solid var(--dark); padding-top:8px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .lang-divider h2 { margin:0; border:0; padding:0; }
+  .lang-divider a { font-size:.85rem; text-decoration:none; }
+  .en h3 { font-size:1rem; margin:30px 0 10px; color:var(--dark); }
+  footer { background:var(--dark); color:#8fa1bd; text-align:center; padding:26px 24px; font-size:.8rem; margin-top:56px; }
+  footer a { color:#b9cbea; }
+  @media (max-width:560px) {
+    .hero h1 { font-size:1.65rem; }
+    .hero { padding:48px 20px 42px; }
+    .top .inner { padding:10px 16px; }
+    .top nav { gap:4px 12px; }
+    .wrap { padding:0 18px; }
+  }
 </style>
 </head>
 <body>
-<div class="hero">
+
+<header class="top">
+  <div class="inner">
+    <a class="brand" href="#top">Daniel Nonato</a>
+    <nav aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#en">English</a>
+      <a href="mailto:daniel.dsn1987@gmail.com">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
   <h1>Daniel da Silva Nonato</h1>
-  <div class="role">Remote Contractor — Datenautomatisierung mit Python</div>
-  <div class="tag">Web Scraping · Datenbereinigung & Migration · Excel/CRM-Automation · B2B-Listen · Bots<br>
-  Start in 24–48 h · Festpreis nach Scoping · Calls 14:00–19:00 MESZ</div>
-</div>
-<div class="wrap">
-  <div class="lang"><a href="#en">English below</a></div>
-
-  <h2>Leistungen</h2>
-  <div class="grid">
-    <div class="card"><b>Datenbereinigung & Migration</b><p>CSV/Excel-Abgleich, Deduplizierung, Blacklist-Handling, Migration zwischen Systemen — saubere Stammdatei + Änderungsreport.</p></div>
-    <div class="card"><b>Web Scraping & Monitoring</b><p>Preis- und Bestandsüberwachung mit Alarm bei Änderung. Lieferung als Excel/CSV oder Report.</p></div>
-    <div class="card"><b>Tabellen- & CRM-Automation</b><p>Wiederkehrende Tabellenarbeit automatisiert: zusammenführen, validieren, formatieren, reporten.</p></div>
-    <div class="card"><b>B2B-Kontaktlisten</b><p>Verifizierte Lead-Listen aus öffentlichen Quellen, dedupliziert, Excel-geliefert.</p></div>
-    <div class="card"><b>Datei- & Bot-Automation</b><p>Batch-Verarbeitung von Dateien; Telegram-Bots für Status und Benachrichtigungen.</p></div>
-  </div>
-
-  <h2>Portfolio — 5 Tools, 186 automatisierte Tests</h2>
-  <div class="grid">
-    <div class="card"><b>SheetForge</b><p>Merge, Dedup und Bereinigung mehrerer CSV-Quellen zu einem XLSX-Report.</p><span class="tests">56 Tests</span></div>
-    <div class="card"><b>PriceHawk</b><p>Preis-Monitoring über mehrere Shops, Alarm + Diff-Report.</p><span class="tests">16 Tests</span></div>
-    <div class="card"><b>LeadHarvest</b><p>B2B-Kontaktlisten, validiert, Excel-Lieferung.</p><span class="tests">33 Tests</span></div>
-    <div class="card"><b>WatchPulse</b><p>Telegram-Monitoring-Bot mit Benachrichtigungen.</p><span class="tests">43 Tests</span></div>
-    <div class="card"><b>FileFlow</b><p>Batch-Umbenennen, Sortieren, Konvertieren.</p><span class="tests">38 Tests</span></div>
-  </div>
-
-  <h2>Warum ich</h2>
-  <ul class="why">
-    <li>Start innerhalb von 24–48 Stunden — kein Recruiting-Zyklus</li>
-    <li>Festpreis nach 10-Minuten-Scoping — keine Stunden-Überraschung</li>
-    <li>Jede Lieferung: lauffähiges Skript + Tests + Anleitung + Demo</li>
-    <li>NDA vor Datenübergabe, AVV (DSGVO) nach Kundenvorlage möglich</li>
-    <li>Remote-Contractor-Rating deutlich unter lokalem Tagessatz — gleiche Lieferqualität</li>
-  </ul>
-
-  <div class="cta" id="en">
-    <b style="font-size:1.1rem">Angebot in 24 h erhalten?</b><br>
-    <span style="color:var(--gray)">Kurze Beschreibung Ihres Problems genügt — Sie erhalten ein schriftliches Festpreis-Angebot.</span><br>
-    <a href="mailto:daniel.dsn1987@gmail.com?subject=Anfrage%20Automatisierung">daniel.dsn1987@gmail.com</a>
-    <div style="margin-top:10px;font-size:.85rem;color:var(--gray)">WhatsApp: +55 61 98183-9037</div>
+  <div class="role">Remote Contractor — Data Automation with Python</div>
+  <div class="tag">Web Scraping · Datenbereinigung &amp; Migration · Excel/CRM-Automation · B2B-Listen · Bots</div>
+  <div class="meta">Freelance-Projekte &amp; langfristige Remote-Mandate · Start in 24–48 h · Festpreis nach Scoping<br>
+  Luziânia-GO, Brasilien (remote) · Calls 14:00–19:00 MESZ · Antwort am selben Arbeitstag</div>
+  <div class="actions">
+    <a class="btn" href="mailto:daniel.dsn1987@gmail.com?subject=Projektanfrage%20Datenautomatisierung">Projekt anfragen</a>
+    <a class="btn ghost" href="cv_de.pdf">CV herunterladen (PDF)</a>
+    <a class="btn ghost" href="https://github.com/Daniel-DSN">GitHub ansehen</a>
   </div>
 </div>
-<footer>Daniel da Silva Nonato · Luziânia-GO, Brasilien (remote) · Zahlung: SEPA (EUR-IBAN) oder Payoneer</footer>
+
+<main class="wrap">
+
+  <section id="leistungen">
+    <h2>Leistungen</h2>
+    <p class="lead">Ich automatisiere wiederkehrende Datenarbeit — mit lauffähigem Code, Tests und Dokumentation statt Folien.</p>
+    <div class="grid">
+      <div class="card"><b>Datenbereinigung &amp; Migration</b><p>CSV/Excel-Abgleich, Deduplizierung, Blacklist-Handling, Migration zwischen Systemen — saubere Stammdatei + Änderungsreport.</p></div>
+      <div class="card"><b>Web Scraping &amp; Monitoring</b><p>Preis- und Bestandsüberwachung mit Alarm bei Änderung. Lieferung als Excel/CSV oder Report.</p></div>
+      <div class="card"><b>Tabellen- &amp; CRM-Automation</b><p>Wiederkehrende Tabellenarbeit automatisiert: zusammenführen, validieren, formatieren, reporten.</p></div>
+      <div class="card"><b>B2B-Kontaktlisten</b><p>Verifizierte Lead-Listen aus öffentlichen Quellen, dedupliziert, Excel-geliefert.</p></div>
+      <div class="card"><b>Datei- &amp; Bot-Automation</b><p>Batch-Verarbeitung von Dateien; Telegram-Bots für Status und Benachrichtigungen.</p></div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <h2>Portfolio — 5 Tools, 190 automatisierte Tests</h2>
+    <p class="lead">Alle Projekte sind öffentlich auf GitHub: Quellcode, Tests, Demo-Ausgaben und README. Keine Mockups.</p>
+    <div class="grid">
+      <div class="card">
+        <b>SheetForge</b>
+        <p>Merge, Dedup und Bereinigung mehrerer CSV-Quellen zu einem XLSX-Report.</p>
+        <span class="tests">56 Tests</span>
+        <div class="links"><a href="https://github.com/Daniel-DSN/sheetforge">Code →</a><a href="https://github.com/Daniel-DSN/sheetforge/tree/main/demo">Demo-Output →</a></div>
+      </div>
+      <div class="card">
+        <b>PriceHawk</b>
+        <p>Preis-Monitoring über mehrere Shops, Alarm + Diff-Report. Neu: robuste Produkt-URL-Erkennung für Nuvemshop, Magento, WooCommerce und wBuy.</p>
+        <span class="tests">20 Tests</span>
+        <div class="links"><a href="https://github.com/Daniel-DSN/pricehawk">Code →</a></div>
+      </div>
+      <div class="card">
+        <b>LeadHarvest</b>
+        <p>B2B-Kontaktlisten, validiert, Excel-Lieferung.</p>
+        <span class="tests">33 Tests</span>
+        <div class="links"><a href="https://github.com/Daniel-DSN/leadharvest">Code →</a><a href="https://github.com/Daniel-DSN/leadharvest/tree/main/demo">Demo-Output →</a></div>
+      </div>
+      <div class="card">
+        <b>WatchPulse</b>
+        <p>Telegram-Monitoring-Bot mit Benachrichtigungen.</p>
+        <span class="tests">43 Tests</span>
+        <div class="links"><a href="https://github.com/Daniel-DSN/watchpulse">Code →</a><a href="https://github.com/Daniel-DSN/watchpulse/tree/main/demo">Demo-Output →</a></div>
+      </div>
+      <div class="card">
+        <b>FileFlow</b>
+        <p>Batch-Umbenennen, Sortieren, Konvertieren.</p>
+        <span class="tests">38 Tests</span>
+        <div class="links"><a href="https://github.com/Daniel-DSN/fileflow">Code →</a><a href="https://github.com/Daniel-DSN/fileflow/tree/main/demo">Demo-Output →</a></div>
+      </div>
+    </div>
+    <p class="cases">Case Studies als PDF: <a href="gig2_portfolio.pdf">SheetForge (2 Seiten)</a> · <a href="pricehawk_portfolio.pdf">PriceHawk (3 Seiten)</a> · <a href="serviceblatt_de.pdf">Leistungsblatt / Konditionen (DE)</a></p>
+  </section>
+
+  <section id="ablauf">
+    <h2>So arbeite ich</h2>
+    <div class="steps">
+      <div class="step"><b>10-Minuten-Scoping</b><p>Problem, Datenquelle, gewünschtes Ergebnis. Ich sage auch, wenn Automatisierung nicht lohnt.</p></div>
+      <div class="step"><b>Festpreis + Termin</b><p>Schriftliches Angebot mit klarem Scope, Meilensteinen und Liefertermin.</p></div>
+      <div class="step"><b>Umsetzung mit Tests</b><p>Kleiner, nachvollziehbarer Code. Jede Funktion hat automatisierte Tests.</p></div>
+      <div class="step"><b>Übergabe mit Doku</b><p>Skript, README, Demo-Lauf und kurze Einweisung. Auf Wunsch NDA und AVV (DSGVO).</p></div>
+    </div>
+  </section>
+
+  <section id="warum">
+    <h2>Warum ich</h2>
+    <ul class="why">
+      <li>Start innerhalb von 24–48 Stunden — kein Recruiting-Zyklus</li>
+      <li>Festpreis nach 10-Minuten-Scoping — keine Stunden-Überraschung</li>
+      <li>Jede Lieferung: lauffähiges Skript + Tests + Anleitung + Demo</li>
+      <li>NDA vor Datenübergabe, AVV (DSGVO) nach Kundenvorlage möglich</li>
+      <li>Remote-Contractor-Rating deutlich unter lokalem Tagessatz — gleiche Lieferqualität</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <b>Angebot in 24 h erhalten?</b><br>
+    <span>Kurze Beschreibung Ihres Problems genügt — Sie erhalten ein schriftliches Festpreis-Angebot.</span><br>
+    <a class="btn" href="mailto:daniel.dsn1987@gmail.com?subject=Anfrage%20Automatisierung">daniel.dsn1987@gmail.com</a>
+    <span class="small">WhatsApp: <a href="https://wa.me/5561981839037">+55 61 98183-9037</a> · <a href="cv_de.pdf">CV (DE)</a> · <a href="cv_en.pdf">CV (EN)</a></span>
+  </div>
+
+  <section id="en" lang="en">
+    <div class="lang-divider">
+      <h2>English</h2>
+      <a href="#top">↑ Deutsch</a>
+    </div>
+    <div class="en">
+      <h3>Remote Contractor — Data Automation with Python</h3>
+      <p class="lead">I automate repetitive data work: web scraping, data cleaning and migration, spreadsheet/CRM automation, B2B lead lists and small bots. Five public tools, 190 automated tests, runnable code — no mockups.</p>
+
+      <h3>Services</h3>
+      <div class="grid">
+        <div class="card"><b>Data cleaning &amp; migration</b><p>CSV/Excel reconciliation, deduplication, blacklist handling, system-to-system migration — clean master file plus change report.</p></div>
+        <div class="card"><b>Web scraping &amp; monitoring</b><p>Price and stock monitoring with change alerts. Delivered as Excel/CSV or a scheduled report.</p></div>
+        <div class="card"><b>Spreadsheet &amp; CRM automation</b><p>Recurring spreadsheet work automated: merge, validate, format, report.</p></div>
+        <div class="card"><b>B2B contact lists</b><p>Verified lead lists from public sources, deduplicated and delivered as Excel.</p></div>
+        <div class="card"><b>File &amp; bot automation</b><p>Batch file processing; Telegram bots for status and notifications.</p></div>
+      </div>
+
+      <h3>Portfolio — 5 tools, 190 automated tests</h3>
+      <ul class="why">
+        <li><a href="https://github.com/Daniel-DSN/sheetforge">SheetForge</a> — merge, dedupe and clean multiple CSV sources into one XLSX report (56 tests).</li>
+        <li><a href="https://github.com/Daniel-DSN/pricehawk">PriceHawk</a> — price monitoring across shops with alerts and diff reports (20 tests).</li>
+        <li><a href="https://github.com/Daniel-DSN/leadharvest">LeadHarvest</a> — validated B2B contact lists delivered as Excel (33 tests).</li>
+        <li><a href="https://github.com/Daniel-DSN/watchpulse">WatchPulse</a> — Telegram monitoring bot with notifications (43 tests).</li>
+        <li><a href="https://github.com/Daniel-DSN/fileflow">FileFlow</a> — batch rename, sort and convert files (38 tests).</li>
+      </ul>
+
+      <h3>How I work</h3>
+      <ul class="why">
+        <li>10-minute scoping call or chat — I will tell you if automation is not worth it.</li>
+        <li>Written fixed-price quote with scope, milestones and delivery date.</li>
+        <li>Small, readable code with automated tests for every function.</li>
+        <li>Handover with script, README, demo run and a short walkthrough. NDA and GDPR data-processing agreement available.</li>
+      </ul>
+
+      <div class="cta">
+        <b>Need a quote within 24 h?</b><br>
+        <span>Send a short description of the problem and you will receive a written fixed-price offer.</span><br>
+        <a class="btn" href="mailto:daniel.dsn1987@gmail.com?subject=Automation%20enquiry">daniel.dsn1987@gmail.com</a>
+        <span class="small">WhatsApp: <a href="https://wa.me/5561981839037">+55 61 98183-9037</a> · <a href="cv_en.pdf">CV (EN)</a> · <a href="cv_de.pdf">CV (DE)</a></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Daniel da Silva Nonato · Luziânia-GO, Brazil (remote) · Payment: SEPA (EUR IBAN) or Payoneer<br>
+  <a href="https://github.com/Daniel-DSN">github.com/Daniel-DSN</a> · <a href="mailto:daniel.dsn1987@gmail.com">daniel.dsn1987@gmail.com</a>
+</footer>
+
 </body>
 </html>
