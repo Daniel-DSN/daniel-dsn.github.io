@@ -23,7 +23,7 @@
 <style>
   :root { --dark:#1a2332; --dark2:#22304a; --acc:#2563eb; --acc2:#7ea8f5; --gray:#555; --muted:#6b7a90; --bg:#f7f9fc; --line:#dbe2ef; --ok:#0f7b4f; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
+  html { scroll-behavior:smooth; scroll-padding-top:70px; }
   body { font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif; color:var(--dark); background:#fff; line-height:1.55; }
   a { color:var(--acc); }
   .top { position:sticky; top:0; z-index:10; background:rgba(26,35,50,.96); backdrop-filter:blur(6px); border-bottom:1px solid rgba(255,255,255,.08); }
@@ -74,6 +74,7 @@
   footer { background:var(--dark); color:#8fa1bd; text-align:center; padding:26px 24px; font-size:.8rem; margin-top:56px; }
   footer a { color:#b9cbea; }
   @media (max-width:560px) {
+    html { scroll-padding-top:104px; }
     .hero h1 { font-size:1.65rem; }
     .hero { padding:48px 20px 42px; }
     .top .inner { padding:10px 16px; }
